@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :employees
+  devise_for :project_managers
   get 'projects/index'
   get 'projects/show'
   get 'projects/edit'
