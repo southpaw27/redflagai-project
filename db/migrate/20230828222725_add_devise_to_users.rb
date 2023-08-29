@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class AddDeviseToProjectManagers < ActiveRecord::Migration[7.0]
+class AddDeviseToUsers < ActiveRecord::Migration[7.0]
   def self.up
-    change_table :project_managers do |t|
+    change_table :users do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -37,10 +37,10 @@ class AddDeviseToProjectManagers < ActiveRecord::Migration[7.0]
       # t.timestamps null: false
     end
 
-    add_index :project_managers, :email,                unique: true
-    add_index :project_managers, :reset_password_token, unique: true
-    # add_index :project_managers, :confirmation_token,   unique: true
-    # add_index :project_managers, :unlock_token,         unique: true
+    add_index :users, :email,                unique: true
+    add_index :users, :reset_password_token, unique: true
+    # add_index :users, :confirmation_token,   unique: true
+    # add_index :users, :unlock_token,         unique: true
   end
 
   def self.down

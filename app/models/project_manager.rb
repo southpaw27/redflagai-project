@@ -1,10 +1,6 @@
 class ProjectManager < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-
   has_many :projects
   has_many :tasks
   
+  has_one :user, as: :role, class_name: 'ProjectManager'
 end

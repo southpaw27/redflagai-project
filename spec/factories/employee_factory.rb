@@ -2,7 +2,7 @@
 FactoryBot.define do
   factory :employee do
     name { "Test Employee" }
-    email { "test.employee@test.com"}
-    password { "password123" }
+    title { "Software Engineer" }
+    work_focus { "Backend" }
   end
 end

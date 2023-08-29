@@ -4,9 +4,9 @@ describe Interactions::Tasks::ChangeStatus do
   let(:project_manager) { create(:project_manager) }
   let(:project) { create(:project, project_manager: project_manager)}
   let(:task) { create(:task, project_manager: project_manager, project: project, employee: employee) }
-  let(:other_project_manager) { create(:project_manager, name: "Other manager", email: "other@test.com") }
+  let(:other_project_manager) { create(:project_manager, name: "Other manager") }
   let(:employee) { create(:employee) }
-  let(:other_employee) { create(:employee, email: 'another@test.com') }
+  let(:other_employee) { create(:employee, name: 'Nick') }
 
   it 'will error if neither a project manager nor an employee is present' do
     outcome = Interactions::Tasks::ChangeStatus.run(task: task, status: Task::Statuses::DONE)
