@@ -26,7 +26,7 @@ class TasksController < ApplicationController
       parent_task: task_params[:parent_task_id],
     )
     if outcome.valid?
-      redirect_to show_task_path(outcome.result)
+      redirect_to "/"
     else
       render "edit"
     end

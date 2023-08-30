@@ -62,6 +62,8 @@
         <th scope="col">Due Date</th>
         <th scope="col">Project Manager</th>
         <th scope="col">Employee</th>
+        <th scope="col">Project</th>
+        <th scope="col">Parent Task</th>
       </tr>
     </thead>
     <tbody>
@@ -70,9 +72,11 @@
         <tr>
           <td><%= task.title %></td>
           <td><%= link_to task.status, change_status_task_path(task) %></td>
-          <td><%= task.due_date.to_date %></td>
-          <td><%= task.project_manager.name %></td>
-          <td><%= task.employee.name %></td>
+          <td><%= task.due_date&.to_date %></td>
+          <td><%= task.project_manager&.name %></td>
+          <td><%= task.employee&.name %></td>
+          <td><%= task.project&.title %></td>
+          <td><%= task.parent_task&.title %></td>
         </tr>
       <% end %>
     </tbody>

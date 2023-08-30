@@ -24,7 +24,7 @@ class ProjectsController < ApplicationController
     if outcome.valid?
       redirect_to @project
     else
-      render "edit"
+      render "/"
     end
   end
 

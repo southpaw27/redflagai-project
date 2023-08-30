@@ -18,12 +18,13 @@
       <%= form.collection_select :project_manager_id, current_user.organization.users.project_managers.all, :id, :name, class: "form-control" %>
     </div>
     <div class="mb-3">
+      <% tasks = current_user.is_employee? ? current_user.tasks : current_user.project_manager_tasks %>
       <%= form.label :parent_task, class: "form-label" %>
-      <%= form.collection_select :parent_task_id, current_user.tasks.all, :id, :title, class: "form-control" %>
+      <%= form.collection_select :parent_task_id, tasks.all, :id, :title, include_blank: true, class: "form-control" %>
     </div>
     <div class="mb-3">
       <%= form.label :employee, class: "form-label" %>
-      <%= form.collection_select :employee_id, current_user.organization.users.employees.all, :id, :name, class: "form-control" %>
+      <%= form.collection_select :employee_id, current_user.organization.users.employees.all, :id, :name, include_blank: true, class: "form-control" %>
     </div>
     <div class="mb-3">
       <%= form.label :project, class: "form-label" %>
