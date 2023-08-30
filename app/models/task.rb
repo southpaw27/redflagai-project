@@ -1,8 +1,8 @@
 class Task < ApplicationRecord
   belongs_to :project
-  belongs_to :project_manager, class_name: 'User'
-  belongs_to :employee, class_name: 'User', optional: true
-  
+  belongs_to :project_manager, class_name: "User"
+  belongs_to :employee, class_name: "User", optional: true
+
   belongs_to :parent_task, class_name: "Task", optional: true
   has_many :subtasks, class_name: "Task", foreign_key: "parent_task_id", dependent: :destroy
 
@@ -41,4 +41,6 @@ class Task < ApplicationRecord
   end
 
   validates :status, inclusion: { in: Task::Statuses.allowed_statuses }
+
+  scope :late, -> { where("due_date < ?", Date.today) }
 end
