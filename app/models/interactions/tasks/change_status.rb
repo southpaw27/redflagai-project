@@ -1,17 +1,14 @@
-
 module Interactions
   module Tasks
     class ChangeStatus < Base
       record :task, class: ::Task
       record :change_user, class: ::User
-      # record :project_manager, class: ::User, default: nil
-      # record :employee, class: ::User, default: nil
       string :status
 
       # validate :presence_of_change_user
       validate :change_user_is_assigned
       validate :status_change_allowed
-      
+
       def execute
         task.update(status: status)
         task

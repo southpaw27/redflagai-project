@@ -1,0 +1,50 @@
+<div class="container">
+  <h1>New User</h1>
+  <%= form_with(model: @user, url: create_new_users_path, local: true) do |form| %>
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :email, class: "form-label" %>
+      <%= form.text_field :email, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :password, class: "form-label" %>
+      <%= form.text_field :password, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :role_type, class: "form-label" %>
+      <%= form.select :role_type, [["Project Manager", "ProjectManager"], ["Employee", "Employee"]], class: "form-select", id: "role_type" %>
+    </div>
+    <%= form.hidden_field :organization_id, value: current_user.organization_id %>
+    <div id="employee_fields" style="display:none">
+      <div class="mb-3">
+        <%= form.label :nickname, class: "form-label" %>
+        <%= form.text_field :nickname, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :title, class: "form-label" %>
+        <%= form.text_field :title, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :work_focus, class: "form-label" %>
+        <%= form.text_field :work_focus, class: "form-control" %>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.submit "Create user", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+    $("#user_role_type").change(function() {
+      let role_type = $(this).val()
+      if (role_type == "Employee") {
+        $("#employee_fields").show()
+      } else {
+        $("#employee_fields").hide()
+      }
+    });
+</script>

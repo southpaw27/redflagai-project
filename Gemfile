@@ -35,6 +35,8 @@ gem "redis", "~> 4.0"
 
 gem 'active_interaction', '~> 5.3'
 
+gem 'cancancan'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -76,3 +78,5 @@ end
 
 
 gem "devise", "~> 4.9"
+
+gem "devise-api", "~> 0.1.3"

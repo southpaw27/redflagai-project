@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Change Status</h1>
+  <%= form_with(model: @task, url: update_status_task_path(task), local: true) do |form| %>
+    <div class="mb-3">
+      <% statuses = current_user.is_employee? ? ::Task::Statuses.employee_statuses : ::Task::Statuses.project_manager_statuses %>
+      <%= form.label :status, class: "form-label" %>
+      <%= form.select :status, statuses.map { |status| [status, status] }, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.submit "Update status", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

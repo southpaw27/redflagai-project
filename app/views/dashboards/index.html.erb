@@ -1,0 +1,79 @@
+
+<div class="container-fluid">
+  <h2>Projects</h2>
+  <% if current_user.is_project_manager? %>
+    <%= link_to "create project", new_project_path %>
+  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Project Manager</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.organization.projects.each do |project| %>
+        <tr>
+          <td><%= project.title %></td>
+          <td><%= project.description %></td>
+          <td><%= project.project_manager.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h2>Users</h2>
+  <% if current_user.is_project_manager? %>
+    <%= link_to "create user", new_user_path %>
+  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Name</th>
+        <th scope="col">Title</th>
+        <th scope="col">Work Focus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.organization.users.each do |user| %>
+        <tr>
+          <td><%= link_to user.role.role_string, edit_user_path(user) %></td>
+          <td><%= user.name %></td>
+          <% if user.is_employee? %>
+            <td><%= user.role.title %></td>
+            <td><%= user.role.work_focus %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h2>Tasks</h2>
+  <% if current_user.is_project_manager? %>
+    <%= link_to "create task", new_task_path %>
+  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Status</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">Project Manager</th>
+        <th scope="col">Employee</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% tasks = current_user.is_employee? ? current_user.tasks : current_user.project_manager_tasks %>
+      <% tasks.each do |task| %>
+        <tr>
+          <td><%= task.title %></td>
+          <td><%= link_to task.status, change_status_task_path(task) %></td>
+          <td><%= task.due_date.to_date %></td>
+          <td><%= task.project_manager.name %></td>
+          <td><%= task.employee.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+</div>

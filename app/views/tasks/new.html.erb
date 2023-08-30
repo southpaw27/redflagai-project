@@ -1,0 +1,41 @@
+<div class="container">
+  <h1>New Task</h1>
+  <%= form_with(model: ::Task, url: tasks_path, local: true) do |form| %>
+    <div class="mb-3">
+      <%= form.label :title, class: "form-label" %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_area :description, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :work_focus, class: "form-label" %>
+      <%= form.text_area :work_focus, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :project_manager_id, class: "form-label" %>
+      <%= form.collection_select :project_manager_id, current_user.organization.users.project_managers.all, :id, :name, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :parent_task, class: "form-label" %>
+      <%= form.collection_select :parent_task_id, current_user.tasks.all, :id, :title, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :employee, class: "form-label" %>
+      <%= form.collection_select :employee_id, current_user.organization.users.employees.all, :id, :name, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :project, class: "form-label" %>
+      <%= form.collection_select :project_id, current_user.projects.all, :id, :title, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :due_date, class: "form-label" %>
+      <%= form.date_field :due_date, class: "form-control" %>
+    </div>
+    <%= form.hidden_field :status, value: Task::Statuses::NOT_STARTED %>
+    <div class="mb-3">
+      <%= form.submit "Create task", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
